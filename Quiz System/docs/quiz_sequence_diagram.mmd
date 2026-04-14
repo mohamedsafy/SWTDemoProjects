@@ -1,0 +1,80 @@
+sequenceDiagram
+autonumber
+actor Player
+participant QuizConsole
+participant QuizRepository
+participant QuizService
+participant QuizJson as quiz.json
+
+== System Initialization ==
+QuizConsole->>QuizRepository: loadQuestions()
+alt quiz.json exists
+  QuizRepository->>QuizJson: read questions array
+  QuizJson-->>QuizRepository: question records
+  QuizRepository-->>QuizConsole: vector<Question>
+else file missing
+  QuizRepository-->>QuizConsole: empty question set
+end
+QuizConsole->>QuizService: setQuestions(questions)
+QuizService-->>QuizConsole: system ready
+QuizConsole-->>Player: Display menu(Start Quiz, View Last Score, Exit)
+
+== Start Quiz ==
+Player->>QuizConsole: Select "Start Quiz"
+QuizConsole->>QuizService: hasQuestions()
+alt question set is empty
+  QuizService-->>QuizConsole: false
+  QuizConsole-->>Player: Display "No questions available"
+else questions available
+  QuizService-->>QuizConsole: true
+  QuizConsole->>QuizService: getQuestions()
+  QuizService-->>QuizConsole: questions
+  loop for each question
+    QuizConsole-->>Player: Show question text and options
+    Player->>QuizConsole: Enter answer choice
+    QuizConsole->>QuizService: validateAnswerChoice(choice, optionCount)
+    alt invalid choice
+      QuizService-->>QuizConsole: false
+      QuizConsole-->>Player: Prompt again with validation error
+      Player->>QuizConsole: Re-enter answer choice
+      QuizConsole->>QuizService: validateAnswerChoice(choice, optionCount)
+      QuizService-->>QuizConsole: true
+    else valid choice
+      QuizService-->>QuizConsole: true
+    end
+    QuizConsole->>QuizConsole: record answer index
+  end
+
+  == Submit Quiz ==
+  QuizConsole->>QuizService: submitQuiz(answerIndices)
+  QuizService->>QuizService: calculateScore(answerIndices)
+  QuizService->>QuizService: buildResult(answerIndices, score)
+  QuizService-->>QuizConsole: Result
+  QuizConsole-->>Player: Display final score
+
+  == Review Answers ==
+  QuizConsole->>QuizService: getLastResult()
+  QuizService-->>QuizConsole: Result
+  QuizConsole->>QuizService: getQuestions()
+  QuizService-->>QuizConsole: questions
+  loop for each question
+    QuizConsole-->>Player: Display user answer and correct answer
+  end
+end
+
+== View Last Score ==
+Player->>QuizConsole: Select "View Last Score"
+QuizConsole->>QuizService: hasLastScore()
+alt score exists
+  QuizService-->>QuizConsole: true
+  QuizConsole->>QuizService: getLastResult()
+  QuizService-->>QuizConsole: Result
+  QuizConsole-->>Player: Display last recorded score
+else no submitted quiz yet
+  QuizService-->>QuizConsole: false
+  QuizConsole-->>Player: Display "No score recorded yet"
+end
+
+== Exit ==
+Player->>QuizConsole: Select "Exit"
+QuizConsole-->>Player: Terminate application

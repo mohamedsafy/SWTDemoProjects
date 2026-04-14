@@ -1,0 +1,9 @@
+sequenceDiagram
+participant UI as CommandConsole
+participant Service as CommandService
+participant Repo as CommandRepository
+
+UI->>Service: viewHistory()
+Service->>Repo: getAll()
+Repo-->>Service: commands
+Service-->>UI: commands

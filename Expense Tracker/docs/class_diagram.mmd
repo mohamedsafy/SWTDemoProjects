@@ -1,0 +1,69 @@
+classDiagram
+
+class Expense {
+    -int id
+    -string description
+    -double amount
+    -string category
+
+    +Expense(int, string, double, string)
+    +int getId()
+    +string getDescription()
+    +double getAmount()
+    +string getCategory()
+    +void setDescription(string)
+    +void setAmount(double)
+    +void setCategory(string)
+}
+
+class ExpenseRepository {
+    -vector<Expense> expenses
+    -string filePath
+
+    +ExpenseRepository(string)
+    +void load()
+    +void save()
+    +vector<Expense> getAll()
+    +void add(Expense)
+    +bool remove(int id)
+    +bool update(Expense)
+}
+
+class ExpenseService {
+    -ExpenseRepository& repo
+
+    +ExpenseService(ExpenseRepository&)
+    +void initialize()
+    +bool addExpense(string description, double amount, string category)
+    +vector<Expense> viewExpenses()
+    +vector<Expense> filterByCategory(string category)
+    +bool editExpense(int id, string description, double amount, string category)
+    +bool deleteExpense(int id)
+    +int generateId()
+}
+
+class ExpenseConsole {
+    -ExpenseService service
+
+    +ExpenseConsole(ExpenseService)
+    +void run()
+    +void showMenu()
+    +void handleAdd()
+    +void handleView()
+    +void handleFilter()
+    +void handleEdit()
+    +void handleDelete()
+}
+
+class Utils {
+    +static bool isValidDescription(string)
+    +static bool isValidAmount(double)
+    +static bool isValidCategory(string)
+    +static bool matchesCategory(string, string)
+}
+
+ExpenseConsole --> ExpenseService
+ExpenseService --> ExpenseRepository
+ExpenseRepository --> Expense
+ExpenseService --> Expense
+ExpenseService --> Utils

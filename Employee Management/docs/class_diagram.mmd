@@ -1,0 +1,69 @@
+classDiagram
+
+class Employee {
+    -int id
+    -string name
+    -string role
+    -double salary
+
+    +Employee(int, string, string, double)
+    +int getId()
+    +string getName()
+    +string getRole()
+    +double getSalary()
+    +void setName(string)
+    +void setRole(string)
+    +void setSalary(double)
+}
+
+class EmployeeRepository {
+    -vector<Employee> employees
+    -string filePath
+
+    +EmployeeRepository(string)
+    +void load()
+    +void save()
+    +vector<Employee> getAll()
+    +void add(Employee)
+    +bool remove(int id)
+    +bool update(Employee)
+}
+
+class EmployeeService {
+    -EmployeeRepository& repo
+
+    +EmployeeService(EmployeeRepository&)
+    +void initialize()
+    +bool addEmployee(string name, string role, double salary)
+    +vector<Employee> viewEmployees()
+    +vector<Employee> search(string keyword)
+    +bool updateEmployee(int id, string name, string role, double salary)
+    +bool deleteEmployee(int id)
+    +int generateId()
+}
+
+class EmployeeConsole {
+    -EmployeeService service
+
+    +EmployeeConsole(EmployeeService)
+    +void run()
+    +void showMenu()
+    +void handleAdd()
+    +void handleView()
+    +void handleSearch()
+    +void handleUpdate()
+    +void handleDelete()
+}
+
+class Utils {
+    +static bool isValidName(string)
+    +static bool isValidRole(string)
+    +static bool isValidSalary(double)
+    +static bool contains(string, string)
+}
+
+EmployeeConsole --> EmployeeService
+EmployeeService --> EmployeeRepository
+EmployeeRepository --> Employee
+EmployeeService --> Employee
+EmployeeService --> Utils

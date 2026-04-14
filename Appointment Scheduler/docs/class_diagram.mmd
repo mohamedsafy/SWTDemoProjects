@@ -1,0 +1,66 @@
+classDiagram
+
+class Appointment {
+    -int id
+    -string title
+    -string date
+    -string time
+
+    +Appointment(int, string, string, string)
+    +int getId()
+    +string getTitle()
+    +string getDate()
+    +string getTime()
+    +void setDate(string)
+    +void setTime(string)
+}
+
+class AppointmentRepository {
+    -vector<Appointment> appointments
+    -string filePath
+
+    +AppointmentRepository(string)
+    +void load()
+    +void save()
+    +vector<Appointment> getAll()
+    +void add(Appointment)
+    +bool remove(int id)
+    +bool update(Appointment)
+}
+
+class SchedulerService {
+    -AppointmentRepository& repo
+
+    +SchedulerService(AppointmentRepository&)
+    +bool bookAppointment(string title, string date, string time)
+    +vector<Appointment> viewAppointments()
+    +bool reschedule(int id, string date, string time)
+    +bool cancel(int id)
+    +bool isAvailable(string date, string time)
+    +int generateId()
+}
+
+class SchedulerConsole {
+    -SchedulerService service
+
+    +SchedulerConsole(SchedulerService)
+    +void run()
+    +void showMenu()
+    +void handleBook()
+    +void handleView()
+    +void handleReschedule()
+    +void handleCancel()
+    +void handleAvailability()
+}
+
+class Utils {
+    +static bool isValidDate(string)
+    +static bool isValidTime(string)
+}
+
+SchedulerConsole --> SchedulerService
+SchedulerService --> AppointmentRepository
+AppointmentRepository --> Appointment
+SchedulerService --> Appointment
+SchedulerService --> Utils
+SchedulerConsole --> Utils

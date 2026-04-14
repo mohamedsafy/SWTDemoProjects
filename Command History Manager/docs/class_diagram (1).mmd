@@ -1,0 +1,58 @@
+classDiagram
+
+class Command {
+    -int id
+    -string text
+
+    +Command(int, string)
+    +int getId()
+    +string getText()
+}
+
+class CommandRepository {
+    -vector<Command> commands
+    -string filePath
+
+    +CommandRepository(string)
+    +void load()
+    +void save()
+    +vector<Command> getAll()
+    +void add(Command)
+    +bool remove(int id)
+}
+
+class CommandService {
+    -CommandRepository& repo
+
+    +CommandService(CommandRepository&)
+    +bool executeCommand(string text)
+    +vector<Command> viewHistory()
+    +vector<Command> search(string keyword)
+    +bool rerun(int id)
+    +bool deleteCommand(int id)
+    +int generateId()
+}
+
+class CommandConsole {
+    -CommandService service
+
+    +CommandConsole(CommandService)
+    +void run()
+    +void showMenu()
+    +void handleExecute()
+    +void handleView()
+    +void handleSearch()
+    +void handleRerun()
+    +void handleDelete()
+}
+
+class Utils {
+    +static bool isValidCommand(string)
+    +static bool contains(string, string)
+}
+
+CommandConsole --> CommandService
+CommandService --> CommandRepository
+CommandRepository --> Command
+CommandService --> Command
+CommandService --> Utils

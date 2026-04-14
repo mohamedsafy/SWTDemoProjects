@@ -1,0 +1,21 @@
+sequenceDiagram
+participant UI as ExpenseConsole
+participant Service as ExpenseService
+participant Repo as ExpenseRepository
+participant Utils
+
+UI->>Service: addExpense(description, amount, category)
+
+Service->>Utils: isValidDescription(description)
+Service->>Utils: isValidAmount(amount)
+Service->>Utils: isValidCategory(category)
+
+alt Invalid input
+    Service-->>UI: failure
+else Valid input
+    Service->>Service: generateId()
+    Service->>Service: create Expense
+    Service->>Repo: add(expense)
+    Service->>Repo: save()
+    Service-->>UI: success
+end

@@ -1,0 +1,15 @@
+sequenceDiagram
+participant UI as ContactConsole
+participant Service as ContactService
+participant Repo as ContactRepository
+
+UI->>Service: deleteContact(id)
+
+Service->>Repo: remove(id)
+
+alt ID exists
+    Service->>Repo: save()
+    Service-->>UI: success
+else Invalid ID
+    Service-->>UI: failure
+end

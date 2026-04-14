@@ -1,0 +1,9 @@
+sequenceDiagram
+participant UI as ContactConsole
+participant Service as ContactService
+participant Repo as ContactRepository
+
+UI->>Service: viewContacts()
+Service->>Repo: getAll()
+Repo-->>Service: contacts
+Service-->>UI: contacts

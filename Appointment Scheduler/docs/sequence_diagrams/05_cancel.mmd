@@ -1,0 +1,16 @@
+sequenceDiagram
+participant UI as SchedulerConsole
+participant Service as SchedulerService
+participant Repo as AppointmentRepository
+
+UI->>UI: handleCancel()
+UI->>Service: cancel(id)
+
+Service->>Repo: remove(id)
+
+alt ID exists
+    Service->>Repo: save()
+    Service-->>UI: success
+else Invalid ID
+    Service-->>UI: failure
+end

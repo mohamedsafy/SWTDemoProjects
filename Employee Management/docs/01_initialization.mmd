@@ -1,0 +1,16 @@
+sequenceDiagram
+participant UI as EmployeeConsole
+participant Service as EmployeeService
+participant Repo as EmployeeRepository
+
+UI->>Service: initialize()
+Service->>Repo: load()
+
+alt File exists
+    Repo->>Repo: read & deserialize JSON
+else File not found
+    Repo->>Repo: initialize empty list
+end
+
+Repo-->>Service: done
+Service-->>UI: ready

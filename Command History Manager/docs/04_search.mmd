@@ -1,0 +1,16 @@
+sequenceDiagram
+participant UI as CommandConsole
+participant Service as CommandService
+participant Repo as CommandRepository
+participant Utils
+
+UI->>Service: search(keyword)
+
+Service->>Repo: getAll()
+Repo-->>Service: commands
+
+loop each command
+    Service->>Utils: contains(text, keyword)
+end
+
+Service-->>UI: matched results

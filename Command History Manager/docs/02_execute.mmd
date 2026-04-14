@@ -1,0 +1,19 @@
+sequenceDiagram
+participant UI as CommandConsole
+participant Service as CommandService
+participant Repo as CommandRepository
+participant Utils
+
+UI->>Service: executeCommand(text)
+
+Service->>Utils: isValidCommand(text)
+
+alt Invalid
+    Service-->>UI: failure
+else Valid
+    Service->>Service: generateId()
+    Service->>Service: simulate execution
+    Service->>Repo: add(command)
+    Service->>Repo: save()
+    Service-->>UI: success
+end

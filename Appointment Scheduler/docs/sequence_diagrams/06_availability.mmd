@@ -1,0 +1,26 @@
+sequenceDiagram
+participant UI as SchedulerConsole
+participant Service as SchedulerService
+participant Repo as AppointmentRepository
+participant Utils
+
+UI->>UI: handleAvailability()
+UI->>Service: isAvailable(date, time)
+
+Service->>Utils: isValidDate(date)
+Service->>Utils: isValidTime(time)
+
+alt Invalid input
+    Service-->>UI: failure
+else Valid input
+    Service->>Repo: getAll()
+    Repo-->>Service: appointments
+
+    Service->>Service: check availability
+
+    alt Free
+        Service-->>UI: available
+    else Occupied
+        Service-->>UI: not available
+    end
+end

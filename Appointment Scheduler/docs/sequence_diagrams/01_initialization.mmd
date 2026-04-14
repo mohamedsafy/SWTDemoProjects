@@ -1,0 +1,17 @@
+sequenceDiagram
+participant UI as SchedulerConsole
+participant Service as SchedulerService
+participant Repo as AppointmentRepository
+
+UI->>Service: initialize()
+Service->>Repo: load()
+
+alt File exists
+    Repo->>Repo: read & deserialize JSON
+else File not found
+    Repo->>Repo: initialize empty list
+end
+
+Repo-->>Service: done
+Service-->>UI: ready
+UI->>UI: showMenu()

@@ -1,0 +1,68 @@
+classDiagram
+direction LR
+
+class TodoConsole {
+  -TaskService& service
+  -InputValidator& validator
+  +run() void
+  +showMenu() void
+  +handleAddTask() void
+  +handleViewTasks() void
+  +handleCompleteTask() void
+  +handleEditTask() void
+  +handleDeleteTask() void
+  +promptDescription() string
+  +promptTaskId() int
+  +displayTasks(tasks: vector~Task~) void
+  +displayMessage(message: string) void
+}
+
+class TaskService {
+  -vector~Task~ tasks
+  -TaskRepository& repository
+  -int nextId
+  +TaskService(repository: TaskRepository)
+  +initialize() void
+  +getTasks() vector~Task~
+  +addTask(description: string) Task
+  +completeTask(taskId: int) bool
+  +editTask(taskId: int, newDescription: string) bool
+  +deleteTask(taskId: int) bool
+  +taskExists(taskId: int) bool
+  -findTaskById(taskId: int) Task*
+  -calculateNextId() int
+  -persistTasks() void
+}
+
+class TaskRepository {
+  -string filePath
+  +TaskRepository(filePath: string = "tasks.json")
+  +loadTasks() vector~Task~
+  +saveTasks(tasks: vector~Task~) void
+  +fileExists() bool
+}
+
+class Task {
+  +int id
+  +string description
+  +bool completed
+  +markCompleted() void
+  +updateDescription(newDescription: string) void
+}
+
+class InputValidator {
+  +isValidMenuChoice(choice: int) bool
+  +isValidTaskId(taskId: int) bool
+  +isValidDescription(description: string) bool
+}
+
+TodoConsole --> TaskService : uses
+TodoConsole --> InputValidator : validates input
+TaskService --> TaskRepository : loads/saves JSON data
+TaskService *-- Task : manages
+TaskRepository ..> Task : serializes
+
+note for TodoConsole "Presentation layer only.\nHandles menu flow, prompts, and output.\nNo business or persistence logic."
+note for TaskService "Logic layer only.\nOwns in-memory tasks, ID generation,\nand all add/view/complete/edit/delete rules."
+note for TaskRepository "Data layer only.\nReads/writes local tasks.json using nlohmann/json\nand keeps file persistence separate from business logic."
+note for InputValidator "Utility helper.\nCentralizes console input validation for\nmenu choice, task IDs, and descriptions."

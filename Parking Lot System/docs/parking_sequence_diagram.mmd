@@ -1,0 +1,105 @@
+sequenceDiagram
+autonumber
+actor Attendant as Parking Attendant
+participant ParkingConsole
+participant ParkingService
+participant ParkingRepository
+participant ParkingJson as parking.json
+
+== System Initialization ==
+ParkingConsole->>ParkingRepository: loadSlots()
+alt parking.json exists
+  ParkingRepository->>ParkingJson: read slots array
+  ParkingJson-->>ParkingRepository: slot records
+  ParkingRepository-->>ParkingConsole: slots
+else file missing
+  ParkingRepository-->>ParkingConsole: empty slot list
+end
+ParkingConsole->>ParkingRepository: loadVehicles()
+alt parking.json exists
+  ParkingRepository->>ParkingJson: read vehicles array
+  ParkingJson-->>ParkingRepository: vehicle records
+  ParkingRepository-->>ParkingConsole: vehicles
+else file missing
+  ParkingRepository-->>ParkingConsole: empty vehicle list
+end
+ParkingConsole->>ParkingService: initialize(slots, vehicles)
+ParkingService-->>ParkingConsole: ready with in-memory parking state
+
+== Park Vehicle ==
+Attendant->>ParkingConsole: Select "Park Vehicle"
+ParkingConsole->>Attendant: Prompt for license plate
+Attendant-->>ParkingConsole: plate
+ParkingConsole->>ParkingService: parkVehicle(plate)
+ParkingService->>ParkingService: validatePlate(plate)
+ParkingService->>ParkingService: isDuplicateVehicle(plate)
+ParkingService->>ParkingService: hasAvailableSlot()
+alt valid plate and slot available
+  ParkingService->>ParkingService: assign first available slot
+  ParkingService->>ParkingService: mark slot occupied
+  ParkingService-->>ParkingConsole: assigned slotId
+  ParkingConsole->>ParkingRepository: saveAll(getSlots(), getVehicles())
+  ParkingRepository->>ParkingJson: write updated slots and vehicles
+  ParkingJson-->>ParkingRepository: persisted
+  ParkingRepository-->>ParkingConsole: save complete
+  ParkingConsole-->>Attendant: Display assigned slot and success
+else invalid input, duplicate plate, or no available slot
+  ParkingService-->>ParkingConsole: parking failure
+  ParkingConsole-->>Attendant: Display error message
+end
+
+== Remove Vehicle ==
+Attendant->>ParkingConsole: Select "Remove Vehicle"
+ParkingConsole->>Attendant: Prompt for license plate or slot ID
+Attendant-->>ParkingConsole: removal input
+alt remove by license plate
+  ParkingConsole->>ParkingService: removeVehicleByPlate(plate)
+else remove by slot ID
+  ParkingConsole->>ParkingService: removeVehicleBySlot(slotId)
+end
+alt matching vehicle found
+  ParkingService->>ParkingService: free associated slot
+  ParkingService->>ParkingService: remove vehicle record
+  ParkingService-->>ParkingConsole: removal success
+  ParkingConsole->>ParkingRepository: saveAll(getSlots(), getVehicles())
+  ParkingRepository->>ParkingJson: write updated slots and vehicles
+  ParkingJson-->>ParkingRepository: persisted
+  ParkingRepository-->>ParkingConsole: save complete
+  ParkingConsole-->>Attendant: Display success
+else invalid plate or slot ID
+  ParkingService-->>ParkingConsole: removal failure
+  ParkingConsole-->>Attendant: Display error message
+end
+
+== View Available Slots ==
+Attendant->>ParkingConsole: Select "View Available Slots"
+ParkingConsole->>ParkingService: getAvailableSlots()
+ParkingService-->>ParkingConsole: available slots
+ParkingConsole-->>Attendant: Display all available slot IDs
+
+== Search Vehicle ==
+Attendant->>ParkingConsole: Select "Search Vehicle"
+ParkingConsole->>Attendant: Prompt for license plate
+Attendant-->>ParkingConsole: plate
+ParkingConsole->>ParkingService: searchVehicle(plate)
+alt vehicle found
+  ParkingService-->>ParkingConsole: slotId
+  ParkingConsole-->>Attendant: Display slot assignment
+else vehicle not found
+  ParkingService-->>ParkingConsole: not found
+  ParkingConsole-->>Attendant: Display error message
+end
+
+== View Parking Status ==
+Attendant->>ParkingConsole: Select "View Parking Status"
+ParkingConsole->>ParkingService: getSlots()
+ParkingService-->>ParkingConsole: all slots
+loop for each slot
+  ParkingConsole->>ParkingService: getVehicleBySlot(slotId)
+  alt slot occupied
+    ParkingService-->>ParkingConsole: vehicle details
+  else slot available
+    ParkingService-->>ParkingConsole: no vehicle
+  end
+end
+ParkingConsole-->>Attendant: Display all slots with availability and vehicle info

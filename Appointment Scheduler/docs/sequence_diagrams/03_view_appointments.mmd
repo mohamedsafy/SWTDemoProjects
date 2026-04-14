@@ -1,0 +1,13 @@
+sequenceDiagram
+participant UI as SchedulerConsole
+participant Service as SchedulerService
+participant Repo as AppointmentRepository
+
+UI->>UI: handleView()
+UI->>Service: viewAppointments()
+
+Service->>Repo: getAll()
+Repo-->>Service: appointments
+
+Service-->>UI: appointments
+UI->>UI: display list

@@ -1,0 +1,18 @@
+sequenceDiagram
+participant UI as ContactConsole
+participant Service as ContactService
+participant Repo as ContactRepository
+participant Utils
+
+UI->>Service: updateContact(id, name, phone)
+
+Service->>Utils: isValidName(name)
+Service->>Utils: isValidPhone(phone)
+
+alt Invalid input
+    Service-->>UI: failure
+else Valid
+    Service->>Repo: update(contact)
+    Service->>Repo: save()
+    Service-->>UI: success
+end

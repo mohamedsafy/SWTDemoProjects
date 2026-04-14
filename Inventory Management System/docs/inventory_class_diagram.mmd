@@ -1,0 +1,65 @@
+classDiagram
+direction LR
+
+class InventoryConsole {
+  -InventoryService& service
+  -InventoryRepository& repository
+  +run() void
+  +showMenu() void
+  +initializeSystem() void
+  +addProduct() void
+  +viewInventory() void
+  +updateProductQuantity() void
+  +searchProduct() void
+  +removeProduct() void
+  +readInt(prompt: string) int
+  +readString(prompt: string) string
+}
+
+class InventoryService {
+  -vector~Product~ products
+  -int nextProductId
+  +initialize(loadedProducts: vector~Product~) void
+  +getAllProducts() vector~Product~
+  +addProduct(name: string, quantity: int) Product
+  +updateProductQuantity(productId: int, newQuantity: int) bool
+  +searchProducts(nameQuery: string) vector~Product~
+  +removeProduct(productId: int) bool
+  +productExists(productId: int) bool
+  +validateProductInput(name: string, quantity: int) bool
+  -generateNextProductId() int
+  -recalculateNextProductId() void
+}
+
+class InventoryRepository {
+  -string filePath
+  +InventoryRepository(filePath: string = "inventory.json")
+  +loadProducts() vector~Product~
+  +saveProducts(products: vector~Product~) void
+  +fileExists() bool
+}
+
+class Product {
+  +int id
+  +string name
+  +int quantity
+}
+
+class Utils {
+  +isNonEmptyText(value: string) bool
+  +isNonNegativeQuantity(quantity: int) bool
+  +isPositiveId(id: int) bool
+  +containsIgnoreCase(text: string, query: string) bool
+}
+
+InventoryConsole --> InventoryService : invokes business operations
+InventoryConsole --> InventoryRepository : loads/saves inventory
+InventoryService *-- Product : manages in memory
+InventoryRepository ..> Product : serializes/deserializes
+InventoryService ..> Utils : validation and search helper
+InventoryConsole ..> Utils : input validation helper
+
+note for InventoryConsole "Presentation layer only.\nOwns the menu loop and user interaction.\nCoordinates persistence after successful state changes."
+note for InventoryService "Logic layer only.\nOwns in-memory inventory state, ID assignment,\nsearch behavior, and business validation.\nNo file or console dependency."
+note for InventoryRepository "Data layer only.\nReads/writes local inventory.json using nlohmann/json.\nReturns empty inventory when the file is missing."
+note for Utils "Optional helper module.\nKeeps simple reusable validation and string-matching logic."

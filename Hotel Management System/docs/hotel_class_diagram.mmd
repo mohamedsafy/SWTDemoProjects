@@ -1,0 +1,66 @@
+classDiagram
+direction LR
+
+class HotelConsole {
+  -HotelService& service
+  +run() void
+  +showMenu() void
+  +bookRoom() void
+  +checkInGuest() void
+  +checkOutGuest() void
+  +cancelReservation() void
+  +viewRoomAvailability() void
+  +readInt(prompt: string) int
+  +readString(prompt: string) string
+}
+
+class HotelService {
+  -vector~Room~ rooms
+  -vector~Reservation~ reservations
+  -int nextReservationId
+  +initialize(repository: HotelRepository) void
+  +bookRoom(guestName: string, roomNumber: int, date: string, repository: HotelRepository) Reservation
+  +checkInGuest(reservationId: int, repository: HotelRepository) bool
+  +checkOutGuest(reservationId: int, repository: HotelRepository) bool
+  +cancelReservation(reservationId: int, repository: HotelRepository) bool
+  +getRooms() vector~Room~
+  +roomExists(roomNumber: int) bool
+  +isRoomAvailable(roomNumber: int) bool
+  +reservationExists(reservationId: int) bool
+  +validateBookingInput(guestName: string, roomNumber: int, date: string) bool
+}
+
+class HotelRepository {
+  -string filePath
+  +HotelRepository(filePath: string = "hotel.json")
+  +loadRooms() vector~Room~
+  +loadReservations() vector~Reservation~
+  +saveAll(rooms: vector~Room~, reservations: vector~Reservation~) void
+  +fileExists() bool
+}
+
+class Room {
+  +int roomNumber
+  +bool isAvailable
+}
+
+class Reservation {
+  +int id
+  +string guestName
+  +int roomNumber
+  +string date
+  +string status
+}
+
+HotelConsole --> HotelService : uses
+HotelService --> HotelRepository : loads/saves JSON data
+HotelService *-- Room : manages availability state
+HotelService *-- Reservation : manages booking lifecycle
+HotelRepository ..> Room : serializes
+HotelRepository ..> Reservation : serializes
+Reservation --> Room : reserves by roomNumber
+
+note for HotelConsole "Presentation layer only.\nHandles menu flow, prompts, and output.\nNo business logic or file access."
+note for HotelService "Logic layer only.\nValidates inputs, prevents double booking,\nassigns unique reservation IDs,\nand updates room/reservation state."
+note for HotelRepository "Data layer only.\nReads/writes local hotel.json using nlohmann/json.\nIf the file is missing, loading returns empty lists."
+note for Reservation "status values remain simple strings\nsuch as Booked, CheckedIn, CheckedOut, and Canceled\nto keep the design within the SRS simplicity constraints."

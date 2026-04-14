@@ -1,0 +1,15 @@
+sequenceDiagram
+participant UI as CommandConsole
+participant Service as CommandService
+participant Repo as CommandRepository
+
+UI->>Service: deleteCommand(id)
+
+Service->>Repo: remove(id)
+
+alt ID exists
+    Service->>Repo: save()
+    Service-->>UI: success
+else Invalid ID
+    Service-->>UI: failure
+end

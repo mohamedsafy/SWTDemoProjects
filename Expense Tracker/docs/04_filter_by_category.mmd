@@ -1,0 +1,22 @@
+sequenceDiagram
+participant UI as ExpenseConsole
+participant Service as ExpenseService
+participant Repo as ExpenseRepository
+participant Utils
+
+UI->>Service: filterByCategory(category)
+
+Service->>Utils: isValidCategory(category)
+
+alt Invalid input
+    Service-->>UI: failure
+else Valid input
+    Service->>Repo: getAll()
+    Repo-->>Service: expenses
+
+    loop each expense
+        Service->>Utils: matchesCategory(expense.category, category)
+    end
+
+    Service-->>UI: filtered expenses
+end

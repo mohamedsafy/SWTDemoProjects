@@ -1,0 +1,21 @@
+sequenceDiagram
+participant UI as EmployeeConsole
+participant Service as EmployeeService
+participant Repo as EmployeeRepository
+participant Utils
+
+UI->>Service: addEmployee(name, role, salary)
+
+Service->>Utils: isValidName(name)
+Service->>Utils: isValidRole(role)
+Service->>Utils: isValidSalary(salary)
+
+alt Invalid input
+    Service-->>UI: failure
+else Valid input
+    Service->>Service: generateId()
+    Service->>Service: create Employee
+    Service->>Repo: add(employee)
+    Service->>Repo: save()
+    Service-->>UI: success
+end

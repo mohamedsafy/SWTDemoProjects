@@ -1,0 +1,9 @@
+sequenceDiagram
+participant UI as EmployeeConsole
+participant Service as EmployeeService
+participant Repo as EmployeeRepository
+
+UI->>Service: viewEmployees()
+Service->>Repo: getAll()
+Repo-->>Service: employees
+Service-->>UI: employees

@@ -1,0 +1,16 @@
+sequenceDiagram
+participant UI as EmployeeConsole
+participant Service as EmployeeService
+participant Repo as EmployeeRepository
+participant Utils
+
+UI->>Service: search(keyword)
+
+Service->>Repo: getAll()
+Repo-->>Service: employees
+
+loop each employee
+    Service->>Utils: contains(name, keyword)
+end
+
+Service-->>UI: results

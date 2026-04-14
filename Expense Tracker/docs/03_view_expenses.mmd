@@ -1,0 +1,9 @@
+sequenceDiagram
+participant UI as ExpenseConsole
+participant Service as ExpenseService
+participant Repo as ExpenseRepository
+
+UI->>Service: viewExpenses()
+Service->>Repo: getAll()
+Repo-->>Service: expenses
+Service-->>UI: expenses

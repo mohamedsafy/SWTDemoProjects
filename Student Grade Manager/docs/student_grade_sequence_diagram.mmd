@@ -1,0 +1,110 @@
+sequenceDiagram
+autonumber
+actor Instructor
+participant GradeConsole
+participant GradeService
+participant GradeRepository
+participant GradeJson as grades.json
+
+== System Initialization ==
+GradeConsole->>GradeRepository: loadStudents()
+alt grades.json exists
+  GradeRepository->>GradeJson: read students array
+  GradeJson-->>GradeRepository: stored student records
+  GradeRepository-->>GradeConsole: students
+else file missing
+  GradeRepository-->>GradeConsole: empty student list
+end
+GradeConsole->>GradeService: initialize(students)
+GradeService->>GradeService: set nextStudentId from loaded data
+GradeService-->>GradeConsole: ready
+
+== Add Student ==
+Instructor->>GradeConsole: Select "Add Student"
+GradeConsole->>Instructor: Prompt for student name
+Instructor-->>GradeConsole: name
+GradeConsole->>GradeService: addStudent(name)
+GradeService->>GradeService: isValidName(name)
+alt valid non-empty name
+  GradeService->>GradeService: assign unique ID
+  GradeService->>GradeService: create student with unassigned grade
+  GradeService-->>GradeConsole: created Student
+  GradeConsole->>GradeService: getAllStudents()
+  GradeService-->>GradeConsole: students
+  GradeConsole->>GradeRepository: saveStudents(students)
+  GradeRepository->>GradeJson: write updated students array
+  GradeJson-->>GradeRepository: persisted
+  GradeRepository-->>GradeConsole: save complete
+  GradeConsole-->>Instructor: Display student ID and success
+else invalid empty name
+  GradeService-->>GradeConsole: validation failure
+  GradeConsole-->>Instructor: Display input error
+end
+
+== Assign Grade ==
+Instructor->>GradeConsole: Select "Assign Grade"
+GradeConsole->>Instructor: Prompt for student ID and grade
+Instructor-->>GradeConsole: studentId, grade
+GradeConsole->>GradeService: assignGrade(studentId, grade)
+GradeService->>GradeService: findStudentById(studentId)
+GradeService->>GradeService: isValidGrade(grade)
+alt valid ID and grade in allowed range
+  GradeService->>GradeService: store grade for student
+  GradeService-->>GradeConsole: assignment success
+  GradeConsole->>GradeService: getAllStudents()
+  GradeService-->>GradeConsole: students
+  GradeConsole->>GradeRepository: saveStudents(students)
+  GradeRepository->>GradeJson: write updated students array
+  GradeJson-->>GradeRepository: persisted
+  GradeRepository-->>GradeConsole: save complete
+  GradeConsole-->>Instructor: Display success
+else invalid ID or invalid grade
+  GradeService-->>GradeConsole: assignment failure
+  GradeConsole-->>Instructor: Display validation error
+end
+
+== Update Grade ==
+Instructor->>GradeConsole: Select "Update Grade"
+GradeConsole->>Instructor: Prompt for student ID and new grade
+Instructor-->>GradeConsole: studentId, newGrade
+GradeConsole->>GradeService: updateGrade(studentId, newGrade)
+GradeService->>GradeService: findStudentById(studentId)
+GradeService->>GradeService: isValidGrade(newGrade)
+alt valid ID and grade in allowed range
+  GradeService->>GradeService: replace stored grade
+  GradeService-->>GradeConsole: update success
+  GradeConsole->>GradeService: getAllStudents()
+  GradeService-->>GradeConsole: students
+  GradeConsole->>GradeRepository: saveStudents(students)
+  GradeRepository->>GradeJson: write updated students array
+  GradeJson-->>GradeRepository: persisted
+  GradeRepository-->>GradeConsole: save complete
+  GradeConsole-->>Instructor: Display success
+else invalid ID or invalid grade
+  GradeService-->>GradeConsole: update failure
+  GradeConsole-->>Instructor: Display validation error
+end
+
+== View Student Grades ==
+Instructor->>GradeConsole: Select "View Student Grades"
+GradeConsole->>GradeService: getAllStudents()
+GradeService-->>GradeConsole: students
+loop for each student
+  GradeConsole-->>Instructor: Display ID, name, and grade status/value
+end
+
+== Calculate Average Grade ==
+Instructor->>GradeConsole: Select "Calculate Average Grade"
+GradeConsole->>GradeService: calculateAverageGrade()
+GradeService->>GradeService: include only assigned grades
+alt at least one assigned grade exists
+  GradeService-->>GradeConsole: average
+  GradeConsole-->>Instructor: Display calculated average
+else no assigned grades
+  GradeService-->>GradeConsole: no average available
+  GradeConsole-->>Instructor: Display informative message
+end
+
+== Exit ==
+Instructor->>GradeConsole: Select "Exit"
+GradeConsole-->>Instructor: Terminate console loop

@@ -1,0 +1,37 @@
+{
+  "books": [
+    {
+      "isbn": "978-0131103627",
+      "title": "The C Programming Language",
+      "author": "Kernighan & Ritchie",
+      "isAvailable": true
+    },
+    {
+      "isbn": "978-0201633610",
+      "title": "Design Patterns",
+      "author": "Gamma et al.",
+      "isAvailable": true
+    },
+    {
+      "isbn": "978-0132350884",
+      "title": "Clean Code",
+      "author": "Robert C. Martin",
+      "isAvailable": true
+    }
+  ],
+  "members": [
+    {
+      "memberId": 5001,
+      "name": "Alice Smith",
+      "activeBorrowings": [],
+      "history": []
+    },
+    {
+      "memberId": 5002,
+      "name": "Bob Jones",
+      "activeBorrowings": [],
+      "history": []
+    }
+  ],
+  "logs": []
+}

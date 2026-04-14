@@ -1,0 +1,59 @@
+classDiagram
+direction LR
+
+class GradeConsole {
+  -GradeService& service
+  -GradeRepository& repository
+  +initializeSystem() void
+  +run() void
+  +showMenu() int
+  +addStudent() void
+  +assignGrade() void
+  +updateGrade() void
+  +viewStudentGrades() void
+  +calculateAverageGrade() void
+  +readStudentName() string
+  +readStudentId() int
+  +readGrade() double
+  +displayMessage(message: string) void
+}
+
+class GradeService {
+  -vector~Student~ students
+  -int nextStudentId
+  +initialize(students: vector~Student~) void
+  +addStudent(name: string) Student
+  +assignGrade(studentId: int, grade: double) bool
+  +updateGrade(studentId: int, grade: double) bool
+  +getAllStudents() vector~Student~
+  +calculateAverageGrade() double
+  +findStudentById(studentId: int) Student*
+  +isValidName(name: string) bool
+  +isValidGrade(grade: double) bool
+  +hasAssignedGrade(student: Student) bool
+}
+
+class GradeRepository {
+  -string filePath
+  +GradeRepository(filePath: string = "grades.json")
+  +loadStudents() vector~Student~
+  +saveStudents(students: vector~Student~) void
+  +fileExists() bool
+}
+
+class Student {
+  +int id
+  +string name
+  +double grade
+  +bool gradeAssigned
+}
+
+GradeConsole --> GradeService : uses
+GradeConsole --> GradeRepository : loads/saves
+GradeService *-- Student : manages
+GradeRepository ..> Student : serializes
+
+note for GradeConsole "Presentation layer only.\nHandles menu flow, input validation prompts,\nand persistence orchestration after successful changes."
+note for GradeService "Logic layer only.\nOwns in-memory student state, unique ID generation,\ngrade validation, and average calculation.\nNo file or console dependency to preserve testability."
+note for GradeRepository "Data layer only.\nReads/writes local grades.json using nlohmann/json.\nReturns empty student list when the file does not exist."
+note for Student "Domain model.\nA student starts with no assigned grade.\nWhen gradeAssigned is false, the grade value is not counted in averages."

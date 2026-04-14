@@ -1,0 +1,64 @@
+classDiagram
+
+class Contact {
+    -int id
+    -string name
+    -string phone
+
+    +Contact(int, string, string)
+    +int getId()
+    +string getName()
+    +string getPhone()
+    +void setName(string)
+    +void setPhone(string)
+}
+
+class ContactRepository {
+    -vector<Contact> contacts
+    -string filePath
+
+    +ContactRepository(string)
+    +void load()
+    +void save()
+    +vector<Contact> getAll()
+    +void add(Contact)
+    +bool remove(int id)
+    +bool update(Contact)
+}
+
+class ContactService {
+    -ContactRepository& repo
+
+    +ContactService(ContactRepository&)
+    +bool addContact(string name, string phone)
+    +vector<Contact> viewContacts()
+    +vector<Contact> search(string keyword)
+    +bool updateContact(int id, string name, string phone)
+    +bool deleteContact(int id)
+    +int generateId()
+}
+
+class ContactConsole {
+    -ContactService service
+
+    +ContactConsole(ContactService)
+    +void run()
+    +void showMenu()
+    +void handleAdd()
+    +void handleView()
+    +void handleSearch()
+    +void handleUpdate()
+    +void handleDelete()
+}
+
+class Utils {
+    +static bool isValidName(string)
+    +static bool isValidPhone(string)
+    +static bool contains(string, string)
+}
+
+ContactConsole --> ContactService
+ContactService --> ContactRepository
+ContactRepository --> Contact
+ContactService --> Contact
+ContactService --> Utils

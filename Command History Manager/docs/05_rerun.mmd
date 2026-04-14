@@ -1,0 +1,16 @@
+sequenceDiagram
+participant UI as CommandConsole
+participant Service as CommandService
+participant Repo as CommandRepository
+
+UI->>Service: rerun(id)
+
+Service->>Repo: getAll()
+Repo-->>Service: commands
+
+alt ID exists
+    Service->>Service: simulate execution
+    Service-->>UI: success
+else Invalid ID
+    Service-->>UI: failure
+end

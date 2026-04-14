@@ -1,0 +1,64 @@
+classDiagram
+direction LR
+
+class QuizConsole {
+  -QuizService& service
+  -QuizRepository& repository
+  +run() void
+  +initialize() void
+  +showMenu() void
+  +startQuiz() void
+  +viewLastScore() void
+  +displayReview(result: Result) void
+  +readMenuChoice() int
+  +readAnswerChoice(question: Question) int
+}
+
+class QuizService {
+  -vector~Question~ questions
+  -Result lastResult
+  -bool hasLastResult
+  +setQuestions(questions: vector~Question~) void
+  +hasQuestions() bool
+  +getQuestions() vector~Question~
+  +validateAnswerChoice(choice: int, optionCount: int) bool
+  +submitQuiz(answerIndices: vector~int~) Result
+  +calculateScore(answerIndices: vector~int~) int
+  +buildResult(answerIndices: vector~int~, score: int) Result
+  +hasLastScore() bool
+  +getLastResult() Result
+}
+
+class QuizRepository {
+  -string filePath
+  +QuizRepository(filePath: string = "quiz.json")
+  +loadQuestions() vector~Question~
+  +fileExists() bool
+}
+
+class Question {
+  +int id
+  +string text
+  +vector~string~ options
+  +int correctIndex
+}
+
+class Result {
+  +vector~int~ userAnswerIndices
+  +int score
+  +int totalQuestions
+  +getUserAnswerFor(questionIndex: int) int
+  +getCorrectAnswerFor(question: Question) int
+}
+
+QuizConsole --> QuizService : uses
+QuizConsole --> QuizRepository : initializes from
+QuizService *-- Question : evaluates
+QuizService *-- Result : stores last score
+QuizRepository ..> Question : deserializes JSON
+Result ..> Question : compares answers during review
+
+note for QuizConsole "Presentation layer only.\nHandles menu loop, prompts, input validation feedback,\nand score/review display for the single player."
+note for QuizService "Logic layer only.\nOwns in-memory questions, validates answer selections,\ncalculates score, builds review data, and keeps last result in memory.\nNo file or console dependency to preserve testability."
+note for QuizRepository "Data layer only.\nLoads questions from local quiz.json using nlohmann/json.\nIf the file is missing, it returns an empty question set."
+note for Result "Stores the last quiz outcome needed for:\n- View Last Score\n- Review Answers\nwithout introducing extra modules beyond the SRS limit."
