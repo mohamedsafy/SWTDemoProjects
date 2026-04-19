@@ -1,8 +1,7 @@
 name: Render Mermaid Diagrams
 on:
-  push:
-    paths:
-      - '' # Only runs when .mmd files change
+  push
+
 
 jobs:
   render:
