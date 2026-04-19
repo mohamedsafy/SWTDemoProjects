@@ -1,0 +1,35 @@
+[
+    {
+        "accountId": 1000,
+        "balance": 1500.75,
+        "card": {
+            "cardNumber": "1234567812345678",
+            "pin": "1234"
+        },
+        "logs": [
+            {
+                "accountId": 1000,
+                "amount": 200.0,
+                "date": "2026-04-02T13:54:02Z",
+                "type": "withdraw"
+            },
+            {
+                "accountId": 1000,
+                "amount": 200.0,
+                "date": "2026-04-02T13:54:21Z",
+                "type": "deposit"
+            }
+        ],
+        "ownerName": "John Doe"
+    },
+    {
+        "accountId": 1001,
+        "balance": 800.5,
+        "card": {
+            "cardNumber": "8765432187654321",
+            "pin": "4321"
+        },
+        "logs": [],
+        "ownerName": "Jane Smith"
+    }
+]

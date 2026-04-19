@@ -31,7 +31,7 @@ The repository contains multiple independent demo projects:
 
 | Project | Main Domain | Typical Artifacts Present |
 | --- | --- | --- |
-| `ATMSystem-ExampleProject` | ATM / banking | Source code, Visual Studio project, SRS/design files, test plan, test conditions, static review reports |
+| `ATM System` | ATM / banking | Source code, Visual Studio project, SRS/design files, test plan, test conditions, static review reports |
 | `Appointment Scheduler` | Appointment booking | Source code, CMake, SRS, class diagram, sequence diagrams |
 | `Command History Manager` | Command tracking | Source code, CMake, SRS, class diagram, sequence diagrams |
 | `Contact Manager` | Contact management | Source code scaffold, SRS, class diagram, sequence diagrams |
