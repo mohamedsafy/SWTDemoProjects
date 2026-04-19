@@ -15,7 +15,7 @@ jobs:
 
       - name: Render .mmd to .png
         run: |
-          # Finds all .mmd files and renders them to .png in the same folder
+          # Finds  all .mmd files and renders them to .png in the same folder
           find . -name "*.mmd" -exec mmdc -i {} -o {}.png \;
           # Rename file.mmd.png to file.png for cleaner naming
           find . -name "*.mmd.png" -exec bash -c 'mv "$1" "${1%.mmd.png}.png"' -- {} \;
