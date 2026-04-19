@@ -29,22 +29,196 @@ It is especially useful for practicing:
 
 The repository contains multiple independent demo projects:
 
-| Project | Main Domain | Typical Artifacts Present |
-| --- | --- | --- |
-| `ATM System` | ATM / banking | Source code, Visual Studio project, SRS/design files, test plan, test conditions, static review reports |
-| `Appointment Scheduler` | Appointment booking | Source code, CMake, SRS, class diagram, sequence diagrams |
-| `Command History Manager` | Command tracking | Source code, CMake, SRS, class diagram, sequence diagrams |
-| `Contact Manager` | Contact management | Source code scaffold, SRS, class diagram, sequence diagrams |
-| `Employee Management` | Employee records | Source code scaffold, SRS, class diagram, sequence diagrams |
-| `Expense Tracker` | Personal finance tracking | Source code scaffold, SRS, class diagram, sequence diagrams |
-| `Hospital Management System` | Hospital operations | Source code scaffold, SRS, class diagram, sequence diagrams |
-| `Hotel Management System` | Hotel operations | Source code scaffold, SRS, class diagram, sequence diagrams |
-| `Inventory Management System` | Inventory control | Source code scaffold, SRS, class diagram, sequence diagrams |
-| `LibraryManagementSystem` | Library operations | Source code, CMake, SRS, class and sequence diagrams |
-| `Parking Lot System` | Parking operations | Source code scaffold, SRS, class diagram, sequence diagrams |
-| `Quiz System` | Quiz management | Source code scaffold, SRS, class diagram, sequence diagrams |
-| `Student Grade Manager` | Grade management | Source code scaffold, SRS, class diagram, sequence diagrams |
-| `TodoList` | Task management | Source code scaffold, SRS, class diagram, sequence diagrams |
+<table>
+    <thead>
+        <tr>
+            <th colspan="2"></th>
+            <th colspan="8">Artifacts Present</th>
+        </tr>
+        <tr>
+            <th>Project</th>
+            <th>Main Domain</th>
+            <th>SRS</th>
+            <th>Class Diagrams</th>
+            <th>Class Diagrams (Rendered)</th>
+            <th>Sequence Diagrams</th>
+            <th>Sequence Diagrams (Rendered)</th>
+            <th>Source Code</th>
+            <th>CMake File</th>
+            <th>Visual Studio Project</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ATM System</td>
+            <td>ATM / banking</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>✅</td>
+        </tr>
+                <tr>
+            <td>Appointment Scheduler</td>
+            <td>Appointment booking</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+                <tr>
+            <td>Command History Manager</td>
+            <td>Command tracking</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+                <tr>
+            <td>Contact Manager</td>
+            <td>Contact management</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+                <tr>
+            <td>Employee Management</td>
+            <td>Employee records</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+                <tr>
+            <td>Expense Tracker</td>
+            <td>Personal finance tracking</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+                <tr>
+            <td>Hospital Management System</td>
+            <td>Hospital operations</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+                <tr>
+            <td>Hotel Management System</td>
+            <td>Hotel operations</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+                <tr>
+            <td>Inventory Management System</td>
+            <td>Inventory control</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+                <tr>
+            <td>LibraryManagementSystem</td>
+            <td>Library operations</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+                <tr>
+            <td>Parking Lot System</td>
+            <td>Parking operations</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+                <tr>
+            <td>Quiz System</td>
+            <td>Quiz management</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+                <tr>
+            <td>Student Grade Manager</td>
+            <td>Grade management</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+                        <tr>
+            <td>TodoList</td>
+            <td>Task management</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
 
 ## Common Structure
 
