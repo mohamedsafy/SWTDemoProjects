@@ -1,6 +1,8 @@
 name: Render Mermaid Diagrams
 on:
-  push
+  push:
+    paths:
+      - '**.mmd'  # Trigger on changes to .mmd files
 
 
 jobs:

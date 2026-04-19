@@ -1,0 +1,14 @@
+sequenceDiagram
+autonumber
+actor User
+participant TodoConsole
+participant InputValidator
+participant TaskService
+participant TaskRepository
+participant TasksJson as tasks.json
+
+== View Tasks ==
+User->>TodoConsole: Select "View Tasks"
+TodoConsole->>TaskService: getTasks()
+TaskService-->>TodoConsole: vector<Task>
+TodoConsole-->>User: display ID, description, completion status

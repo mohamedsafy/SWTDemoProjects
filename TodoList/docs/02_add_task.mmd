@@ -1,0 +1,27 @@
+sequenceDiagram
+autonumber
+actor User
+participant TodoConsole
+participant InputValidator
+participant TaskService
+participant TaskRepository
+participant TasksJson as tasks.json
+
+== Add Task ==
+User->>TodoConsole: Select "Add Task"
+TodoConsole->>User: Prompt for description
+User-->>TodoConsole: description
+TodoConsole->>InputValidator: isValidDescription(description)
+alt valid description
+  TodoConsole->>TaskService: addTask(description)
+  TaskService->>TaskService: create Task(nextId, description, false)
+  TaskService->>TaskRepository: saveTasks(tasks)
+  TaskRepository->>TasksJson: write updated tasks
+  TasksJson-->>TaskRepository: persisted
+  TaskRepository-->>TaskService: save complete
+  TaskService-->>TodoConsole: created Task
+  TodoConsole-->>User: display success
+else invalid description
+  InputValidator-->>TodoConsole: false
+  TodoConsole-->>User: display validation error
+end

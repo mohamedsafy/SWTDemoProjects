@@ -1,0 +1,29 @@
+sequenceDiagram
+autonumber
+actor Instructor
+participant GradeConsole
+participant GradeService
+participant GradeRepository
+participant GradeJson as grades.json
+
+== Add Student ==
+Instructor->>GradeConsole: Select "Add Student"
+GradeConsole->>Instructor: Prompt for student name
+Instructor-->>GradeConsole: name
+GradeConsole->>GradeService: addStudent(name)
+GradeService->>GradeService: isValidName(name)
+alt valid non-empty name
+  GradeService->>GradeService: assign unique ID
+  GradeService->>GradeService: create student with unassigned grade
+  GradeService-->>GradeConsole: created Student
+  GradeConsole->>GradeService: getAllStudents()
+  GradeService-->>GradeConsole: students
+  GradeConsole->>GradeRepository: saveStudents(students)
+  GradeRepository->>GradeJson: write updated students array
+  GradeJson-->>GradeRepository: persisted
+  GradeRepository-->>GradeConsole: save complete
+  GradeConsole-->>Instructor: Display student ID and success
+else invalid empty name
+  GradeService-->>GradeConsole: validation failure
+  GradeConsole-->>Instructor: Display input error
+end

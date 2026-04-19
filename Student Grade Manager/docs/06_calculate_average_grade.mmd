@@ -1,0 +1,19 @@
+sequenceDiagram
+autonumber
+actor Instructor
+participant GradeConsole
+participant GradeService
+participant GradeRepository
+participant GradeJson as grades.json
+
+== Calculate Average Grade ==
+Instructor->>GradeConsole: Select "Calculate Average Grade"
+GradeConsole->>GradeService: calculateAverageGrade()
+GradeService->>GradeService: include only assigned grades
+alt at least one assigned grade exists
+  GradeService-->>GradeConsole: average
+  GradeConsole-->>Instructor: Display calculated average
+else no assigned grades
+  GradeService-->>GradeConsole: no average available
+  GradeConsole-->>Instructor: Display informative message
+end

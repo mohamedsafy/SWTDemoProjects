@@ -1,0 +1,27 @@
+sequenceDiagram
+autonumber
+actor Receptionist
+participant HotelConsole
+participant HotelService
+participant HotelRepository
+participant HotelJson as hotel.json
+
+== Cancel Reservation ==
+Receptionist->>HotelConsole: Select "Cancel Reservation"
+HotelConsole->>Receptionist: Prompt for reservation ID
+Receptionist-->>HotelConsole: reservationId
+HotelConsole->>HotelService: cancelReservation(reservationId, repository)
+HotelService->>HotelService: reservationExists(reservationId)
+alt reservation exists and not finalized
+  HotelService->>HotelService: update reservation.status = "Canceled"
+  HotelService->>HotelService: keep room available when reservation is not checked in
+  HotelService->>HotelRepository: saveAll(rooms, reservations)
+  HotelRepository->>HotelJson: write updated rooms and reservations
+  HotelJson-->>HotelRepository: persisted
+  HotelRepository-->>HotelService: save complete
+  HotelService-->>HotelConsole: cancellation success
+  HotelConsole-->>Receptionist: Display success
+else invalid reservation ID
+  HotelService-->>HotelConsole: cancellation failure
+  HotelConsole-->>Receptionist: Display error message
+end

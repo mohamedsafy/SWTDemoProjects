@@ -1,0 +1,29 @@
+sequenceDiagram
+autonumber
+actor Instructor
+participant GradeConsole
+participant GradeService
+participant GradeRepository
+participant GradeJson as grades.json
+
+== Update Grade ==
+Instructor->>GradeConsole: Select "Update Grade"
+GradeConsole->>Instructor: Prompt for student ID and new grade
+Instructor-->>GradeConsole: studentId, newGrade
+GradeConsole->>GradeService: updateGrade(studentId, newGrade)
+GradeService->>GradeService: findStudentById(studentId)
+GradeService->>GradeService: isValidGrade(newGrade)
+alt valid ID and grade in allowed range
+  GradeService->>GradeService: replace stored grade
+  GradeService-->>GradeConsole: update success
+  GradeConsole->>GradeService: getAllStudents()
+  GradeService-->>GradeConsole: students
+  GradeConsole->>GradeRepository: saveStudents(students)
+  GradeRepository->>GradeJson: write updated students array
+  GradeJson-->>GradeRepository: persisted
+  GradeRepository-->>GradeConsole: save complete
+  GradeConsole-->>Instructor: Display success
+else invalid ID or invalid grade
+  GradeService-->>GradeConsole: update failure
+  GradeConsole-->>Instructor: Display validation error
+end

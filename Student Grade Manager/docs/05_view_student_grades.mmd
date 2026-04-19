@@ -1,0 +1,15 @@
+sequenceDiagram
+autonumber
+actor Instructor
+participant GradeConsole
+participant GradeService
+participant GradeRepository
+participant GradeJson as grades.json
+
+== View Student Grades ==
+Instructor->>GradeConsole: Select "View Student Grades"
+GradeConsole->>GradeService: getAllStudents()
+GradeService-->>GradeConsole: students
+loop for each student
+  GradeConsole-->>Instructor: Display ID, name, and grade status/value
+end

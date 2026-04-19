@@ -1,0 +1,27 @@
+sequenceDiagram
+autonumber
+actor Receptionist
+participant HotelConsole
+participant HotelService
+participant HotelRepository
+participant HotelJson as hotel.json
+
+== Check-in Guest ==
+Receptionist->>HotelConsole: Select "Check-in Guest"
+HotelConsole->>Receptionist: Prompt for reservation ID
+Receptionist-->>HotelConsole: reservationId
+HotelConsole->>HotelService: checkInGuest(reservationId, repository)
+HotelService->>HotelService: reservationExists(reservationId)
+alt reservation exists and status is "Booked"
+  HotelService->>HotelService: mark room.isAvailable = false
+  HotelService->>HotelService: update reservation.status = "CheckedIn"
+  HotelService->>HotelRepository: saveAll(rooms, reservations)
+  HotelRepository->>HotelJson: write updated rooms and reservations
+  HotelJson-->>HotelRepository: persisted
+  HotelRepository-->>HotelService: save complete
+  HotelService-->>HotelConsole: check-in success
+  HotelConsole-->>Receptionist: Display success
+else invalid reservation ID or invalid status
+  HotelService-->>HotelConsole: check-in failure
+  HotelConsole-->>Receptionist: Display error message
+end

@@ -1,0 +1,28 @@
+sequenceDiagram
+autonumber
+actor Receptionist
+participant HotelConsole
+participant HotelService
+participant HotelRepository
+participant HotelJson as hotel.json
+
+== System Initialization ==
+HotelConsole->>HotelService: initialize(repository)
+HotelService->>HotelRepository: loadRooms()
+alt hotel.json exists
+  HotelRepository->>HotelJson: read rooms array
+  HotelJson-->>HotelRepository: room records
+  HotelRepository-->>HotelService: rooms
+else file missing
+  HotelRepository-->>HotelService: empty room list
+end
+HotelService->>HotelRepository: loadReservations()
+alt hotel.json exists
+  HotelRepository->>HotelJson: read reservations array
+  HotelJson-->>HotelRepository: reservation records
+  HotelRepository-->>HotelService: reservations
+else file missing
+  HotelRepository-->>HotelService: empty reservation list
+end
+HotelService->>HotelService: determine nextReservationId
+HotelService-->>HotelConsole: ready with in-memory state

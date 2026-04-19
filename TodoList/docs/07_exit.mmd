@@ -1,0 +1,12 @@
+sequenceDiagram
+autonumber
+actor User
+participant TodoConsole
+participant InputValidator
+participant TaskService
+participant TaskRepository
+participant TasksJson as tasks.json
+
+== Exit ==
+User->>TodoConsole: Select "Exit"
+TodoConsole-->>User: terminate application

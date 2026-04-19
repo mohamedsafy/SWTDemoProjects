@@ -1,0 +1,11 @@
+sequenceDiagram
+autonumber
+actor Instructor
+participant GradeConsole
+participant GradeService
+participant GradeRepository
+participant GradeJson as grades.json
+
+== Exit ==
+Instructor->>GradeConsole: Select "Exit"
+GradeConsole-->>Instructor: Terminate console loop

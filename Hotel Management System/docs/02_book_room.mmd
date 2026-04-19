@@ -1,0 +1,29 @@
+sequenceDiagram
+autonumber
+actor Receptionist
+participant HotelConsole
+participant HotelService
+participant HotelRepository
+participant HotelJson as hotel.json
+
+== Book Room ==
+Receptionist->>HotelConsole: Select "Book Room"
+HotelConsole->>Receptionist: Prompt for guest name, room number, and date
+Receptionist-->>HotelConsole: guestName, roomNumber, date
+HotelConsole->>HotelService: bookRoom(guestName, roomNumber, date, repository)
+HotelService->>HotelService: validateBookingInput(guestName, roomNumber, date)
+HotelService->>HotelService: roomExists(roomNumber)
+HotelService->>HotelService: isRoomAvailable(roomNumber)
+alt valid input and room available
+  HotelService->>HotelService: create Reservation(status = "Booked")
+  HotelService->>HotelService: assign unique reservation ID
+  HotelService->>HotelRepository: saveAll(rooms, reservations)
+  HotelRepository->>HotelJson: write updated rooms and reservations
+  HotelJson-->>HotelRepository: persisted
+  HotelRepository-->>HotelService: save complete
+  HotelService-->>HotelConsole: created Reservation
+  HotelConsole-->>Receptionist: Display reservation ID and success
+else invalid input or unavailable room
+  HotelService-->>HotelConsole: booking failure
+  HotelConsole-->>Receptionist: Display validation error
+end

@@ -1,0 +1,12 @@
+sequenceDiagram
+autonumber
+actor StoreManager
+participant InventoryConsole
+participant InventoryService
+participant Utils
+participant InventoryRepository
+participant InventoryJson as inventory.json
+
+== Exit ==
+StoreManager->>InventoryConsole: Select "Exit"
+InventoryConsole-->>StoreManager: Terminate application

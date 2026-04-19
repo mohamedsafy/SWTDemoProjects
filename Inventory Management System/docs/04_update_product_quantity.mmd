@@ -1,0 +1,31 @@
+sequenceDiagram
+autonumber
+actor StoreManager
+participant InventoryConsole
+participant InventoryService
+participant Utils
+participant InventoryRepository
+participant InventoryJson as inventory.json
+
+== Update Product Quantity ==
+StoreManager->>InventoryConsole: Select "Update Product Quantity"
+InventoryConsole->>StoreManager: Prompt for product ID and new quantity
+StoreManager-->>InventoryConsole: productId, newQuantity
+InventoryConsole->>InventoryService: updateProductQuantity(productId, newQuantity)
+InventoryService->>Utils: isPositiveId(productId)
+InventoryService->>Utils: isNonNegativeQuantity(newQuantity)
+InventoryService->>InventoryService: productExists(productId)
+alt valid ID and quantity
+  InventoryService->>InventoryService: update quantity
+  InventoryService-->>InventoryConsole: update success
+  InventoryConsole->>InventoryService: getAllProducts()
+  InventoryService-->>InventoryConsole: products
+  InventoryConsole->>InventoryRepository: saveProducts(products)
+  InventoryRepository->>InventoryJson: write updated products array
+  InventoryJson-->>InventoryRepository: persisted
+  InventoryRepository-->>InventoryConsole: save complete
+  InventoryConsole-->>StoreManager: Display success
+else invalid ID or negative quantity
+  InventoryService-->>InventoryConsole: update failure
+  InventoryConsole-->>StoreManager: Display error message
+end

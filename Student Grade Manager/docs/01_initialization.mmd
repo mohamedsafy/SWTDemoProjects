@@ -1,0 +1,20 @@
+sequenceDiagram
+autonumber
+actor Instructor
+participant GradeConsole
+participant GradeService
+participant GradeRepository
+participant GradeJson as grades.json
+
+== System Initialization ==
+GradeConsole->>GradeRepository: loadStudents()
+alt grades.json exists
+  GradeRepository->>GradeJson: read students array
+  GradeJson-->>GradeRepository: stored student records
+  GradeRepository-->>GradeConsole: students
+else file missing
+  GradeRepository-->>GradeConsole: empty student list
+end
+GradeConsole->>GradeService: initialize(students)
+GradeService->>GradeService: set nextStudentId from loaded data
+GradeService-->>GradeConsole: ready

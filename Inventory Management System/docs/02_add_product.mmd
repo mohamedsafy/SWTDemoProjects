@@ -1,0 +1,31 @@
+sequenceDiagram
+autonumber
+actor StoreManager
+participant InventoryConsole
+participant InventoryService
+participant Utils
+participant InventoryRepository
+participant InventoryJson as inventory.json
+
+== Add Product ==
+StoreManager->>InventoryConsole: Select "Add Product"
+InventoryConsole->>StoreManager: Prompt for name and quantity
+StoreManager-->>InventoryConsole: name, quantity
+InventoryConsole->>InventoryService: addProduct(name, quantity)
+InventoryService->>Utils: isNonEmptyText(name)
+InventoryService->>Utils: isNonNegativeQuantity(quantity)
+alt valid product data
+  InventoryService->>InventoryService: generateNextProductId()
+  InventoryService->>InventoryService: append Product
+  InventoryService-->>InventoryConsole: created Product
+  InventoryConsole->>InventoryService: getAllProducts()
+  InventoryService-->>InventoryConsole: products
+  InventoryConsole->>InventoryRepository: saveProducts(products)
+  InventoryRepository->>InventoryJson: write updated products array
+  InventoryJson-->>InventoryRepository: persisted
+  InventoryRepository-->>InventoryConsole: save complete
+  InventoryConsole-->>StoreManager: Display success and product ID
+else invalid name or negative quantity
+  InventoryService-->>InventoryConsole: validation failure
+  InventoryConsole-->>StoreManager: Display error message
+end

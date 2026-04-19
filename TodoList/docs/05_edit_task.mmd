@@ -1,0 +1,34 @@
+sequenceDiagram
+autonumber
+actor User
+participant TodoConsole
+participant InputValidator
+participant TaskService
+participant TaskRepository
+participant TasksJson as tasks.json
+
+== Edit Task ==
+User->>TodoConsole: Select "Edit Task"
+TodoConsole->>User: Prompt for task ID and new description
+User-->>TodoConsole: taskId, newDescription
+TodoConsole->>InputValidator: isValidTaskId(taskId)
+TodoConsole->>InputValidator: isValidDescription(newDescription)
+alt valid input
+  TodoConsole->>TaskService: editTask(taskId, newDescription)
+  TaskService->>TaskService: findTaskById(taskId)
+  alt task found
+    TaskService->>Task: updateDescription(newDescription)
+    TaskService->>TaskRepository: saveTasks(tasks)
+    TaskRepository->>TasksJson: write updated tasks
+    TasksJson-->>TaskRepository: persisted
+    TaskRepository-->>TaskService: save complete
+    TaskService-->>TodoConsole: true
+    TodoConsole-->>User: display success
+  else task not found
+    TaskService-->>TodoConsole: false
+    TodoConsole-->>User: display invalid ID error
+  end
+else invalid input
+  InputValidator-->>TodoConsole: false
+  TodoConsole-->>User: display validation error
+end

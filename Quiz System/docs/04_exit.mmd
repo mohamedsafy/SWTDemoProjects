@@ -1,0 +1,11 @@
+sequenceDiagram
+autonumber
+actor Player
+participant QuizConsole
+participant QuizRepository
+participant QuizService
+participant QuizJson as quiz.json
+
+== Exit ==
+Player->>QuizConsole: Select "Exit"
+QuizConsole-->>Player: Terminate application

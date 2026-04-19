@@ -1,0 +1,20 @@
+sequenceDiagram
+autonumber
+actor Player
+participant QuizConsole
+participant QuizRepository
+participant QuizService
+participant QuizJson as quiz.json
+
+== View Last Score ==
+Player->>QuizConsole: Select "View Last Score"
+QuizConsole->>QuizService: hasLastScore()
+alt score exists
+  QuizService-->>QuizConsole: true
+  QuizConsole->>QuizService: getLastResult()
+  QuizService-->>QuizConsole: Result
+  QuizConsole-->>Player: Display last recorded score
+else no submitted quiz yet
+  QuizService-->>QuizConsole: false
+  QuizConsole-->>Player: Display "No score recorded yet"
+end

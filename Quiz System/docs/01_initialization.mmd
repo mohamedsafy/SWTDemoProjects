@@ -1,0 +1,20 @@
+sequenceDiagram
+autonumber
+actor Player
+participant QuizConsole
+participant QuizRepository
+participant QuizService
+participant QuizJson as quiz.json
+
+== System Initialization ==
+QuizConsole->>QuizRepository: loadQuestions()
+alt quiz.json exists
+  QuizRepository->>QuizJson: read questions array
+  QuizJson-->>QuizRepository: question records
+  QuizRepository-->>QuizConsole: vector<Question>
+else file missing
+  QuizRepository-->>QuizConsole: empty question set
+end
+QuizConsole->>QuizService: setQuestions(questions)
+QuizService-->>QuizConsole: system ready
+QuizConsole-->>Player: Display menu(Start Quiz, View Last Score, Exit)

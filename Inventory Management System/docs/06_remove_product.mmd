@@ -1,0 +1,30 @@
+sequenceDiagram
+autonumber
+actor StoreManager
+participant InventoryConsole
+participant InventoryService
+participant Utils
+participant InventoryRepository
+participant InventoryJson as inventory.json
+
+== Remove Product ==
+StoreManager->>InventoryConsole: Select "Remove Product"
+InventoryConsole->>StoreManager: Prompt for product ID
+StoreManager-->>InventoryConsole: productId
+InventoryConsole->>InventoryService: removeProduct(productId)
+InventoryService->>Utils: isPositiveId(productId)
+InventoryService->>InventoryService: productExists(productId)
+alt valid existing product ID
+  InventoryService->>InventoryService: erase Product
+  InventoryService-->>InventoryConsole: removal success
+  InventoryConsole->>InventoryService: getAllProducts()
+  InventoryService-->>InventoryConsole: products
+  InventoryConsole->>InventoryRepository: saveProducts(products)
+  InventoryRepository->>InventoryJson: write updated products array
+  InventoryJson-->>InventoryRepository: persisted
+  InventoryRepository-->>InventoryConsole: save complete
+  InventoryConsole-->>StoreManager: Display success
+else invalid product ID
+  InventoryService-->>InventoryConsole: removal failure
+  InventoryConsole-->>StoreManager: Display error message
+end

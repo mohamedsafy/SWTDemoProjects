@@ -1,0 +1,13 @@
+sequenceDiagram
+autonumber
+actor Receptionist
+participant HotelConsole
+participant HotelService
+participant HotelRepository
+participant HotelJson as hotel.json
+
+== View Room Availability ==
+Receptionist->>HotelConsole: Select "View Room Availability"
+HotelConsole->>HotelService: getRooms()
+HotelService-->>HotelConsole: rooms with roomNumber and isAvailable
+HotelConsole-->>Receptionist: Display all rooms and availability status

@@ -1,0 +1,21 @@
+sequenceDiagram
+autonumber
+actor StoreManager
+participant InventoryConsole
+participant InventoryService
+participant Utils
+participant InventoryRepository
+participant InventoryJson as inventory.json
+
+== System Initialization ==
+InventoryConsole->>InventoryRepository: loadProducts()
+alt inventory.json exists
+  InventoryRepository->>InventoryJson: read products array
+  InventoryJson-->>InventoryRepository: product records
+  InventoryRepository-->>InventoryConsole: loadedProducts
+else file missing
+  InventoryRepository-->>InventoryConsole: empty product list
+end
+InventoryConsole->>InventoryService: initialize(loadedProducts)
+InventoryService->>InventoryService: recalculateNextProductId()
+InventoryService-->>InventoryConsole: ready

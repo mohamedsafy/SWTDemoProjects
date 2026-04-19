@@ -1,0 +1,23 @@
+sequenceDiagram
+autonumber
+actor User
+participant TodoConsole
+participant InputValidator
+participant TaskService
+participant TaskRepository
+participant TasksJson as tasks.json
+
+== System Initialization ==
+TodoConsole->>TaskService: initialize()
+TaskService->>TaskRepository: loadTasks()
+alt tasks.json exists
+  TaskRepository->>TasksJson: read tasks array
+  TasksJson-->>TaskRepository: persisted task records
+  TaskRepository-->>TaskService: vector<Task>
+  TaskService->>TaskService: calculateNextId()
+else file missing
+  TaskRepository-->>TaskService: empty task list
+  TaskService->>TaskService: set nextId = 1
+end
+TaskService-->>TodoConsole: ready
+TodoConsole-->>User: display main menu
