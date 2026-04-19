@@ -1,0 +1,28 @@
+name: Render Mermaid Diagrams
+on:
+  push:
+    paths:
+      - '**.mmd' # Only runs when .mmd files change
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup mermaid-cli
+        uses: AnimMouse/setup-mermaid-cli@v1
+
+      - name: Render .mmd to .png
+        run: |
+          # Finds all .mmd files and renders them to .png in the same folder
+          find . -name "*.mmd" -exec mmdc -i {} -o {}.png \;
+          # Rename file.mmd.png to file.png for cleaner naming
+          find . -name "*.mmd.png" -exec bash -c 'mv "$1" "${1%.mmd.png}.png"' -- {} \;
+
+      - name: Commit and Push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update rendered mermaid diagrams"
+          file_pattern: '**.png'
