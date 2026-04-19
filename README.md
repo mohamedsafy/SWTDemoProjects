@@ -25,9 +25,30 @@ It is especially useful for practicing:
 - Preparing test plans and review reports
 - Exploring traceability between requirements, design, code, and tests
 
+## Common Structure
+
+Most project folders follow a structure similar to:
+
+```text
+ProjectName/
+|-- src/      # C++ source files and supporting headers
+|-- docs/     # SRS, diagrams, review/testing artifacts
+`-- CMakeLists.txt or IDE project files
+```
+
+Common artifact types in this repository include:
+
+- `docs/srs.md` or `docs/SRS.docx`: software requirements specification
+- `*.mmd`: Mermaid class or sequence diagrams
+- `*.drawio` / `*.png`: exported design diagrams
+- `CMakeLists.txt`: build configuration for selected projects
+- `*.vcxproj` / `*.sln`: Visual Studio project files
+- `*.json`: simple data storage for demo applications
+
+
 ## Repository Overview
 
-The repository contains multiple independent demo projects:
+The repository contains multiple independent demo projects, below is a list of the artifacts available for each project:
 
 <table>
     <thead>
@@ -128,7 +149,7 @@ The repository contains multiple independent demo projects:
             <td>✅</td>
             <td>✅</td>
             <td>✅</td>
-            <td>❌</td>
+            <td>✅</td>
             <td>❌</td>
             <td>❌</td>
             <td>❌</td>
@@ -140,7 +161,7 @@ The repository contains multiple independent demo projects:
             <td>✅</td>
             <td>✅</td>
             <td>✅</td>
-            <td>❌</td>
+            <td>✅</td>
             <td>❌</td>
             <td>❌</td>
             <td>❌</td>
@@ -152,7 +173,7 @@ The repository contains multiple independent demo projects:
             <td>✅</td>
             <td>✅</td>
             <td>✅</td>
-            <td>❌</td>
+            <td>✅</td>
             <td>❌</td>
             <td>❌</td>
             <td>❌</td>
@@ -176,7 +197,7 @@ The repository contains multiple independent demo projects:
             <td>✅</td>
             <td>✅</td>
             <td>✅</td>
-            <td>❌</td>
+            <td>✅</td>
             <td>❌</td>
             <td>❌</td>
             <td>❌</td>
@@ -188,7 +209,7 @@ The repository contains multiple independent demo projects:
             <td>✅</td>
             <td>✅</td>
             <td>✅</td>
-            <td>❌</td>
+            <td>✅</td>
             <td>❌</td>
             <td>❌</td>
             <td>❌</td>
@@ -200,7 +221,7 @@ The repository contains multiple independent demo projects:
             <td>✅</td>
             <td>✅</td>
             <td>✅</td>
-            <td>❌</td>
+            <td>✅</td>
             <td>❌</td>
             <td>❌</td>
             <td>❌</td>
@@ -212,7 +233,7 @@ The repository contains multiple independent demo projects:
             <td>✅</td>
             <td>✅</td>
             <td>✅</td>
-            <td>❌</td>
+            <td>✅</td>
             <td>❌</td>
             <td>❌</td>
             <td>❌</td>
@@ -220,25 +241,7 @@ The repository contains multiple independent demo projects:
     </tbody>
 </table>
 
-## Common Structure
-
-Most project folders follow a structure similar to:
-
-```text
-ProjectName/
-|-- src/      # C++ source files and supporting headers
-|-- docs/     # SRS, diagrams, review/testing artifacts
-`-- CMakeLists.txt or IDE project files
-```
-
-Common artifact types in this repository include:
-
-- `docs/srs.md` or `docs/SRS.docx`: software requirements specification
-- `*.mmd`: Mermaid class or sequence diagrams
-- `*.drawio` / `*.png`: exported design diagrams
-- `CMakeLists.txt`: build configuration for selected projects
-- `*.vcxproj` / `*.sln`: Visual Studio project files
-- `*.json`: simple data storage for demo applications
+**This table is updated regularly.
 
 ## How This Maps to the ISTQB Test Process
 
@@ -253,7 +256,7 @@ Use each project to define:
 - Entry and exit criteria
 - Deliverables such as test plans and reports
 
-The ATM example already includes test planning-oriented artifacts under [`ATMSystem-ExampleProject/docs`](./ATMSystem-ExampleProject/docs).
+The ATM example already includes test planning-oriented artifacts under [`ATM System/docs`](./ATM System/docs).
 
 ### 2. Test Analysis
 
@@ -334,8 +337,8 @@ Not every project currently has the same build setup, but several projects can b
 
 The ATM demo includes:
 
-- `ATMSystem-ExampleProject/ATMSystem.sln`
-- `ATMSystem-ExampleProject/ATMSystem.vcxproj`
+- `ATM System/ATMSystem.sln`
+- `ATM System/ATMSystem.vcxproj`
 
 Open the solution in Visual Studio and build/run it from there.
 
