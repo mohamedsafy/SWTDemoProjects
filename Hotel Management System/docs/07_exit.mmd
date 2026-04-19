@@ -4,8 +4,9 @@ actor Receptionist
 participant HotelConsole
 participant HotelService
 participant HotelRepository
-participant HotelJson as hotel.json
+participant HotelJson as "hotel.json"
 
-== Exit ==
+
+
 Receptionist->>HotelConsole: Select "Exit"
 HotelConsole-->>Receptionist: End application

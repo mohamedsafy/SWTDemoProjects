@@ -5,9 +5,9 @@ participant TodoConsole
 participant InputValidator
 participant TaskService
 participant TaskRepository
-participant TasksJson as tasks.json
+participant TasksJson as "tasks.json"
 
-== Delete Task ==
+
 User->>TodoConsole: Select "Delete Task"
 TodoConsole->>User: Prompt for task ID
 User-->>TodoConsole: taskId

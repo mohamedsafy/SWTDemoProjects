@@ -4,9 +4,9 @@ actor Receptionist
 participant HotelConsole
 participant HotelService
 participant HotelRepository
-participant HotelJson as hotel.json
+participant HotelJson as "hotel.json"
 
-== System Initialization ==
+
 HotelConsole->>HotelService: initialize(repository)
 HotelService->>HotelRepository: loadRooms()
 alt hotel.json exists

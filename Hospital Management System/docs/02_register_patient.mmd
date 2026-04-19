@@ -4,9 +4,8 @@ actor Receptionist
 participant HospitalConsole
 participant HospitalService
 participant HospitalRepository
-participant HospitalJson as hospital.json
+participant HospitalJson as "hospital.json"
 
-== Register Patient ==
 Receptionist->>HospitalConsole: Select "Register Patient"
 HospitalConsole->>Receptionist: Prompt for name and age
 Receptionist-->>HospitalConsole: name, age

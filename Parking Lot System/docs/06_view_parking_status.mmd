@@ -4,9 +4,9 @@ actor Attendant as Parking Attendant
 participant ParkingConsole
 participant ParkingService
 participant ParkingRepository
-participant ParkingJson as parking.json
+participant ParkingJson as "parking.json"
 
-== View Parking Status ==
+
 Attendant->>ParkingConsole: Select "View Parking Status"
 ParkingConsole->>ParkingService: getSlots()
 ParkingService-->>ParkingConsole: all slots

@@ -4,9 +4,8 @@ actor Receptionist
 participant HospitalConsole
 participant HospitalService
 participant HospitalRepository
-participant HospitalJson as hospital.json
+participant HospitalJson as "hospital.json"
 
-== Update Patient Information ==
 Receptionist->>HospitalConsole: Select "Update Patient Information"
 HospitalConsole->>Receptionist: Prompt for patient ID and updated data
 Receptionist-->>HospitalConsole: patientId, name, age

@@ -4,9 +4,9 @@ actor Receptionist
 participant HotelConsole
 participant HotelService
 participant HotelRepository
-participant HotelJson as hotel.json
+participant HotelJson as "hotel.json"
 
-== Cancel Reservation ==
+
 Receptionist->>HotelConsole: Select "Cancel Reservation"
 HotelConsole->>Receptionist: Prompt for reservation ID
 Receptionist-->>HotelConsole: reservationId

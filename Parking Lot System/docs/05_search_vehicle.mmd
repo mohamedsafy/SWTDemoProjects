@@ -4,9 +4,9 @@ actor Attendant as Parking Attendant
 participant ParkingConsole
 participant ParkingService
 participant ParkingRepository
-participant ParkingJson as parking.json
+participant ParkingJson as "parking.json"
 
-== Search Vehicle ==
+
 Attendant->>ParkingConsole: Select "Search Vehicle"
 ParkingConsole->>Attendant: Prompt for license plate
 Attendant-->>ParkingConsole: plate

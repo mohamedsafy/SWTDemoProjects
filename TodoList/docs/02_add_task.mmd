@@ -5,9 +5,9 @@ participant TodoConsole
 participant InputValidator
 participant TaskService
 participant TaskRepository
-participant TasksJson as tasks.json
+participant TasksJson as "tasks.json"
 
-== Add Task ==
+
 User->>TodoConsole: Select "Add Task"
 TodoConsole->>User: Prompt for description
 User-->>TodoConsole: description

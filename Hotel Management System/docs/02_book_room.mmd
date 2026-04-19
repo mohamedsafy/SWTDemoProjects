@@ -4,9 +4,9 @@ actor Receptionist
 participant HotelConsole
 participant HotelService
 participant HotelRepository
-participant HotelJson as hotel.json
+participant HotelJson as "hotel.json"
 
-== Book Room ==
+
 Receptionist->>HotelConsole: Select "Book Room"
 HotelConsole->>Receptionist: Prompt for guest name, room number, and date
 Receptionist-->>HotelConsole: guestName, roomNumber, date

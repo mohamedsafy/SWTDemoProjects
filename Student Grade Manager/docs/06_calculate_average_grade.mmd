@@ -4,9 +4,9 @@ actor Instructor
 participant GradeConsole
 participant GradeService
 participant GradeRepository
-participant GradeJson as grades.json
+participant GradeJson as "grades.json"
 
-== Calculate Average Grade ==
+
 Instructor->>GradeConsole: Select "Calculate Average Grade"
 GradeConsole->>GradeService: calculateAverageGrade()
 GradeService->>GradeService: include only assigned grades

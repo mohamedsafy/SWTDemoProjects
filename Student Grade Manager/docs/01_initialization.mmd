@@ -4,9 +4,9 @@ actor Instructor
 participant GradeConsole
 participant GradeService
 participant GradeRepository
-participant GradeJson as grades.json
+participant GradeJson as "grades.json"
 
-== System Initialization ==
+
 GradeConsole->>GradeRepository: loadStudents()
 alt grades.json exists
   GradeRepository->>GradeJson: read students array

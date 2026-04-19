@@ -4,9 +4,9 @@ actor Instructor
 participant GradeConsole
 participant GradeService
 participant GradeRepository
-participant GradeJson as grades.json
+participant GradeJson as "grades.json"
 
-== Assign Grade ==
+
 Instructor->>GradeConsole: Select "Assign Grade"
 GradeConsole->>Instructor: Prompt for student ID and grade
 Instructor-->>GradeConsole: studentId, grade

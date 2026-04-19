@@ -5,9 +5,9 @@ participant InventoryConsole
 participant InventoryService
 participant Utils
 participant InventoryRepository
-participant InventoryJson as inventory.json
+participant InventoryJson as "inventory.json"
 
-== Remove Product ==
+
 StoreManager->>InventoryConsole: Select "Remove Product"
 InventoryConsole->>StoreManager: Prompt for product ID
 StoreManager-->>InventoryConsole: productId

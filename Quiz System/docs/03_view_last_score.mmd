@@ -4,9 +4,9 @@ actor Player
 participant QuizConsole
 participant QuizRepository
 participant QuizService
-participant QuizJson as quiz.json
+participant QuizJson as "quiz.json"
 
-== View Last Score ==
+
 Player->>QuizConsole: Select "View Last Score"
 QuizConsole->>QuizService: hasLastScore()
 alt score exists

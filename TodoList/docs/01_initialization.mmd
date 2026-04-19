@@ -5,9 +5,9 @@ participant TodoConsole
 participant InputValidator
 participant TaskService
 participant TaskRepository
-participant TasksJson as tasks.json
+participant TasksJson as "tasks.json"
 
-== System Initialization ==
+
 TodoConsole->>TaskService: initialize()
 TaskService->>TaskRepository: loadTasks()
 alt tasks.json exists

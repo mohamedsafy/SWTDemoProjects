@@ -4,9 +4,9 @@ actor Receptionist
 participant HospitalConsole
 participant HospitalService
 participant HospitalRepository
-participant HospitalJson as hospital.json
+participant HospitalJson as "hospital.json"
 
-== Cancel Appointment ==
+
 Receptionist->>HospitalConsole: Select "Cancel Appointment"
 HospitalConsole->>Receptionist: Prompt for appointment ID
 Receptionist-->>HospitalConsole: appointmentId

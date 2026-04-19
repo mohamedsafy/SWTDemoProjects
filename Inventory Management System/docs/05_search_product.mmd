@@ -5,9 +5,9 @@ participant InventoryConsole
 participant InventoryService
 participant Utils
 participant InventoryRepository
-participant InventoryJson as inventory.json
+participant InventoryJson as "inventory.json"
 
-== Search Product ==
+
 StoreManager->>InventoryConsole: Select "Search Product"
 InventoryConsole->>StoreManager: Prompt for full or partial name
 StoreManager-->>InventoryConsole: nameQuery

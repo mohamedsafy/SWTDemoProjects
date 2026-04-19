@@ -5,9 +5,9 @@ participant InventoryConsole
 participant InventoryService
 participant Utils
 participant InventoryRepository
-participant InventoryJson as inventory.json
+participant InventoryJson as "inventory.json"
 
-== Add Product ==
+
 StoreManager->>InventoryConsole: Select "Add Product"
 InventoryConsole->>StoreManager: Prompt for name and quantity
 StoreManager-->>InventoryConsole: name, quantity

@@ -4,9 +4,9 @@ actor Attendant as Parking Attendant
 participant ParkingConsole
 participant ParkingService
 participant ParkingRepository
-participant ParkingJson as parking.json
+participant ParkingJson as "parking.json"
 
-== System Initialization ==
+
 ParkingConsole->>ParkingRepository: loadSlots()
 alt parking.json exists
   ParkingRepository->>ParkingJson: read slots array
