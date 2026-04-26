@@ -234,8 +234,8 @@ The repository contains multiple independent demo projects, below is a list of t
             <td>✅</td>
             <td>✅</td>
             <td>✅</td>
-            <td>❌</td>
-            <td>❌</td>
+            <td>✅</td>
+            <td>✅</td>
             <td>❌</td>
         </tr>
     </tbody>
