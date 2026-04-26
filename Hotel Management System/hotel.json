@@ -1,0 +1,10 @@
+{
+  "rooms": [
+    { "roomNumber": 101, "isAvailable": true },
+    { "roomNumber": 102, "isAvailable": true },
+    { "roomNumber": 103, "isAvailable": true },
+    { "roomNumber": 104, "isAvailable": true },
+    { "roomNumber": 105, "isAvailable": true }
+  ],
+  "reservations": []
+}
