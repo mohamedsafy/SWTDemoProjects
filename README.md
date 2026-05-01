@@ -92,7 +92,7 @@ The repository contains multiple independent demo projects, below is a list of t
             <td>✅</td>
             <td>✅</td>
             <td>✅</td>
-            <td>❌</td>
+            <td>✅</td>
         </tr>
                 <tr>
             <td>Command History Manager</td>
@@ -104,7 +104,7 @@ The repository contains multiple independent demo projects, below is a list of t
             <td>✅</td>
             <td>✅</td>
             <td>✅</td>
-            <td>❌</td>
+            <td>✅</td>
         </tr>
                 <tr>
             <td>Contact Manager</td>
@@ -116,7 +116,7 @@ The repository contains multiple independent demo projects, below is a list of t
             <td>✅</td>
             <td>✅</td>
             <td>✅</td>
-            <td>❌</td>
+            <td>✅</td>
         </tr>
                 <tr>
             <td>Employee Management</td>
@@ -128,7 +128,7 @@ The repository contains multiple independent demo projects, below is a list of t
             <td>✅</td>
             <td>✅</td>
             <td>✅</td>
-            <td>❌</td>
+            <td>✅</td>
         </tr>
                 <tr>
             <td>Expense Tracker</td>
@@ -140,7 +140,7 @@ The repository contains multiple independent demo projects, below is a list of t
             <td>✅</td>
             <td>✅</td>
             <td>✅</td>
-            <td>❌</td>
+            <td>✅</td>
         </tr>
                 <tr>
             <td>Hospital Management System</td>
@@ -152,7 +152,7 @@ The repository contains multiple independent demo projects, below is a list of t
             <td>✅</td>
             <td>✅</td>
             <td>✅</td>
-            <td>❌</td>
+            <td>✅</td>
         </tr>
                 <tr>
             <td>Hotel Management System</td>
@@ -164,7 +164,7 @@ The repository contains multiple independent demo projects, below is a list of t
             <td>✅</td>
             <td>✅</td>
             <td>✅</td>
-            <td>❌</td>
+            <td>✅</td>
         </tr>
                 <tr>
             <td>Inventory Management System</td>
@@ -176,7 +176,7 @@ The repository contains multiple independent demo projects, below is a list of t
             <td>✅</td>
             <td>✅</td>
             <td>✅</td>
-            <td>❌</td>
+            <td>✅</td>
         </tr>
                 <tr>
             <td>LibraryManagementSystem</td>
@@ -188,7 +188,7 @@ The repository contains multiple independent demo projects, below is a list of t
             <td>✅</td>
             <td>✅</td>
             <td>✅</td>
-            <td>❌</td>
+            <td>✅</td>
         </tr>
                 <tr>
             <td>Parking Lot System</td>
@@ -200,7 +200,7 @@ The repository contains multiple independent demo projects, below is a list of t
             <td>✅</td>
             <td>✅</td>
             <td>✅</td>
-            <td>❌</td>
+            <td>✅</td>
         </tr>
                 <tr>
             <td>Quiz System</td>
@@ -212,7 +212,7 @@ The repository contains multiple independent demo projects, below is a list of t
             <td>✅</td>
             <td>✅</td>
             <td>✅</td>
-            <td>❌</td>
+            <td>✅</td>
         </tr>
                 <tr>
             <td>Student Grade Manager</td>
@@ -224,7 +224,7 @@ The repository contains multiple independent demo projects, below is a list of t
             <td>✅</td>
             <td>✅</td>
             <td>✅</td>
-            <td>❌</td>
+            <td>✅</td>
         </tr>
                         <tr>
             <td>TodoList</td>
@@ -236,7 +236,7 @@ The repository contains multiple independent demo projects, below is a list of t
             <td>✅</td>
             <td>✅</td>
             <td>✅</td>
-            <td>❌</td>
+            <td>✅</td>
         </tr>
     </tbody>
 </table>

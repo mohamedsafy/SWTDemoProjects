@@ -20,30 +20,29 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
-    <ProjectGuid>{269A6707-EF6E-16C4-82E4-9F2651D45DCB}</ProjectGuid>
+    <ProjectGuid>{0B2681DD-7A6A-28FA-8AD3-D42C0A923181}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -120,23 +119,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\AccountsDatabase.cpp" />
-    <ClCompile Include="src\ATMConsole.cpp" />
-    <ClCompile Include="src\ATMEngine.cpp" />
-    <ClCompile Include="src\BankAccount.cpp" />
-    <ClCompile Include="src\Card.cpp" />
-    <ClCompile Include="src\Log.cpp" />
+    <ClCompile Include="src\HotelConsole.cpp" />
+    <ClCompile Include="src\HotelRepository.cpp" />
+    <ClCompile Include="src\HotelService.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\AccountsDatabase.h" />
-    <ClInclude Include="src\ATMConsole.h" />
-    <ClInclude Include="src\ATMEngine.h" />
-    <ClInclude Include="src\BankAccount.h" />
-    <ClInclude Include="src\Card.h" />
+    <ClInclude Include="src\HotelConsole.h" />
+    <ClInclude Include="src\HotelRepository.h" />
+    <ClInclude Include="src\HotelService.h" />
     <ClInclude Include="src\json.hpp" />
-    <ClInclude Include="src\Log.h" />
+    <ClInclude Include="src\Reservation.h" />
+    <ClInclude Include="src\Room.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="build\cmakefiles\4.3.2\CMakeDetermineCompilerABI_CXX.bin" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
 </Project>
