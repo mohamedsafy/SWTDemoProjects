@@ -15,16 +15,22 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\HospitalRepository.cpp">
+    <ClCompile Include="HospitalRepository.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\HospitalService.cpp">
+    <ClCompile Include="HospitalService.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\HospitalConsole.cpp">
+    <ClCompile Include="HospitalConsole.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\main.cpp">
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="build\cmakefiles\4.3.2\compileridcxx\CMakeCXXCompilerId.cpp">
@@ -32,22 +38,25 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Patient.h">
+    <ClInclude Include="Patient.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Appointment.h">
+    <ClInclude Include="Appointment.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\HospitalRepository.h">
+    <ClInclude Include="HospitalRepository.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\HospitalService.h">
+    <ClInclude Include="HospitalService.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\HospitalConsole.h">
+    <ClInclude Include="HospitalConsole.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\json.hpp">
+    <ClInclude Include="json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

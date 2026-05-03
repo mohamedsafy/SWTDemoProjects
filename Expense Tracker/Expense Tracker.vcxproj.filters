@@ -15,16 +15,22 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\ExpenseRepository.cpp">
+    <ClCompile Include="ExpenseRepository.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ExpenseService.cpp">
+    <ClCompile Include="ExpenseService.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ExpenseConsole.cpp">
+    <ClCompile Include="ExpenseConsole.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\main.cpp">
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="build\cmakefiles\4.3.2\compileridcxx\CMakeCXXCompilerId.cpp">
@@ -32,22 +38,25 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Expense.h">
+    <ClInclude Include="Expense.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ExpenseRepository.h">
+    <ClInclude Include="ExpenseRepository.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ExpenseService.h">
+    <ClInclude Include="ExpenseService.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ExpenseConsole.h">
+    <ClInclude Include="ExpenseConsole.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Utils.h">
+    <ClInclude Include="Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\json.hpp">
+    <ClInclude Include="json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

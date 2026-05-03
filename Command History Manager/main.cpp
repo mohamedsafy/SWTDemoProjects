@@ -3,6 +3,7 @@
 #include "CommandService.h"
 #include <string>
 
+/*
 int main() {
     const std::string dataFile = "commands.json";
     CommandRepository repo(dataFile);
@@ -11,3 +12,4 @@ int main() {
     console.run();
     return 0;
 }
+*/
